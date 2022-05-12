@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!--<external-path path="." name="all_files"/>
+    -->
+    <!--内置SD卡 getExternalFilesDir(null) .表示共享所有的目录，也可以指定共享的目录-->
+    <external-path
+        name="external-path"
+        path="." />
+    <!--内置SD卡 Context.getExternalCacheDir() .表示共享所有的目录，也可以指定共享的目录-->
+    <external-cache-path
+        name="external-cache-path"
+        path="." />
+    <!--内置SD卡 Context.getExternalFilesDir(null) .表示共享所有的目录，也可以指定共享的目录-->
+    <external-files-path
+        name="external-files-path"
+        path="." />
+    <!--data目录下 Context.getFilesDir() .表示共享所有的目录，也可以指定共享的目录-->
+    <files-path
+        name="files_path"
+        path="." />
+    <!--data缓存目录 Context.getCacheDir() .表示共享所有的目录，也可以指定共享的目录-->
+    <cache-path
+        name="cache-path"
+        path="." />
+    <!--这个标签Android官方文档中是没有提及，Android设备的根目录，该目录下包含着手机内部存储器，外置SD卡等所有文件的目录-->
+    <root-path
+        name="name"
+        path="." />
+
+
+    <!-- 热更新路径配置 Start -->
+    <!-- /storage/emulated/0/Download/${applicationId}/.beta/apk-->
+    <external-path
+        name="beta_external_path"
+        path="Download/" />
+    <!--/storage/emulated/0/Android/data/${applicationId}/files/apk/-->
+    <external-path
+        name="beta_external_files_path"
+        path="Android/data/" />
+    <!-- 热更新路径配置 End -->
+</paths>

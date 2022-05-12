@@ -1,0 +1,55 @@
+group 'demo.flutter.flutter_camera_plugin'
+version '1.0'
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+        maven { url 'http://developer.huawei.com/repo/'}//华为远程库
+        maven { url "https://jitpack.io" }
+        maven {
+            url "https://repo.baichuan-android.taobao.com/content/groups/BaichuanRepositories/"
+        }
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.1.0'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+        maven { url 'http://developer.huawei.com/repo/'}//华为远程库
+        maven { url "https://jitpack.io" }
+        maven {
+            url "https://repo.baichuan-android.taobao.com/content/groups/BaichuanRepositories/"
+        }
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 30
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion 16
+    }
+}
+dependencies {
+    implementation'com.zhihu.android:matisse:0.5.3-beta3'
+    implementation'com.github.bumptech.glide:glide:4.9.0'
+    implementation'androidx.core:core:1.6.0'
+    implementation'com.google.code.gson:gson:2.8.0'
+    annotationProcessor'com.github.bumptech.glide:compiler:4.9.0'
+
+}
