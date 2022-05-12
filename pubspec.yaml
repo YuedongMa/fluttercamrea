@@ -1,8 +1,8 @@
 name: flutter_camera_plugin
 description: A new Flutter plugin.
 version: 0.0.1
-author: Yuedong Ma<mayuedong@shinetechchina.com>
-homepage: http://code.9885.net/mayuedong/fluttercamreaplugin.git
+author: YuedongMa<mayuedong@shinetechchina.com>
+homepage: https://github.com/YuedongMa/fluttercamrea.git
 
 environment:
   sdk: ">=2.14.0 <3.0.0"
