@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:flutter/services.dart';
 
 class FlutterCameraPlugin {
@@ -10,7 +11,7 @@ class FlutterCameraPlugin {
     return version;
   }
 
-  static Future<dynamic> takePhoto(int maxSelectNum) async {
+  static Future<dynamic> takePhoto([int? maxSelectNum]) async {
     String path = await _channel.invokeMethod('takePhoto', maxSelectNum);
     dynamic list = json.decode(path);
     return list;
@@ -20,17 +21,4 @@ class FlutterCameraPlugin {
     String path = await _channel.invokeMethod('takeCamera');
     return path;
   }
-
-// cameraPluginInit() {
-//   _channel.setMethodCallHandler((handler) async {
-//     switch (handler.method) {
-//       case "takePhotoResult":
-//         debugPrint('====takePhoto--==' + handler.arguments);
-//         break;
-//       case "takeCameraResult":
-//         debugPrint('====takeCamera--==' + handler.arguments);
-//         break;
-//     }
-//   });
-// }
 }

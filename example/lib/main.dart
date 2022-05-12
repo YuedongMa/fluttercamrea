@@ -94,7 +94,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<dynamic> takePhoto(int maxSelectedNum) async {
-    dynamic path = await FlutterCameraPlugin.takePhoto(maxSelectedNum);
+    dynamic path = await FlutterCameraPlugin.takePhoto();
     return path;
   }
 
