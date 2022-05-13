@@ -73,7 +73,13 @@
 #pragma mark - UIImagePickerController delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     UIImage *selectedImage = info[UIImagePickerControllerEditedImage]?:info[UIImagePickerControllerOriginalImage];
-    NSString *imageName = [NSString stringWithFormat:@"%f",[NSDate timeIntervalSinceReferenceDate]];
+    
+     NSDate * date=[NSDate date];
+     NSDateFormatter *dateformatter=[[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"YYYYMMddHHmmss"];
+    NSString * imageName=[dateformatter stringFromDate:date];
+
+//    NSString *imageName = [NSString stringWithFormat:@"%@",[NSDate timeIntervalSinceReferenceDate]];
     imageName = [imageName stringByReplacingOccurrencesOfString:@" " withString:@""];
     imageName = [imageName stringByAppendingString:@".png"];
     [self saveImage:selectedImage withName:imageName];
@@ -93,25 +99,36 @@
 //保存图片
 - (void)saveImage:(UIImage *)currentImage withName:(NSString *)imageName {
     NSData *imageData =  UIImageJPEGRepresentation(currentImage, 0); // 1为不缩放保存,取值为(0~1)
-    NSString *fullPath =  [self urlForImage:imageName].path;
+    NSString *fullPath = [self getImagePath:imageName];//imageName为图片名称
     BOOL isSave = [imageData writeToFile:fullPath atomically:NO];
     NSLog(@" t图片地址。%@   -save=%@ ",fullPath,isSave?@"YES":@"NO");
-    NSMutableArray *pathMArr = [NSMutableArray array];
-    [pathMArr addObject:fullPath];
-    if (self.resultBlock) {
+    if (self.resultBlock&&isSave) {
         self.resultBlock(fullPath);
+    }else {
+        self.resultBlock(@"");
     }
 }
 //获取图片路径
-- (NSURL *) urlForImage:(NSString *)fileName {
-    [self createDir];
-     NSString *pathForStoreName = [[self imImageCashPath] stringByAppendingPathComponent:fileName];
-    return [NSURL fileURLWithPath:pathForStoreName];
-}
+- (NSString*)getImagePath:(NSString *)name {
 
-- (NSString *)imImageCashPath {
-     NSString *dataFilePath = [self urlForStoreName:@"IMCashImage"].path;
-    return dataFilePath;
+    NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,  NSUserDomainMask, YES);
+
+    NSString *docPath = [path objectAtIndex:0];
+
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+
+    NSString *finalPath = [docPath stringByAppendingPathComponent:name];
+
+    
+
+    // Remove the filename and create the remaining path
+
+    [fileManager createDirectoryAtPath:[finalPath stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:nil];//stringByDeletingLastPathComponent是关键
+
+    
+
+    return finalPath;
+
 }
 
 - (NSString *)applicationStorageDirectory {
