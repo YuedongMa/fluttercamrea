@@ -24,6 +24,24 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+    <key>NSAppleMusicUsageDescription</key>
+    <string>需要您的同意，才能访问媒体资源库，选择媒体资源上传到该App</string>
+    <key>NSCameraUsageDescription</key>
+    <string>需要您的同意，才能访问摄像头，录制信息上传到该App</string>
+    <key>NSContactsUsageDescription</key>
+    <string>需要您的同意，才能访问通讯录，信息将上传该App</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>需要您的同意，才能访问当前的地理位置，该位置信息将用于搜索附近的店铺</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>需要您的同意，才能访问当前的地理位置，该位置信息将用于搜索附近的店铺以及发送地理位置给聊天好友</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>需要您的同意，才能使用麦克风，录制的信息将上传到该App</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>需要您的同意，才能访问相册，用来添加图片</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>需要您的同意，才能访问相册，选择图片信息上传到该App</string>
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>需要您的同意，才能使用语音识别，用来识别语音消息</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

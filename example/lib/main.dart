@@ -49,10 +49,9 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  File? file;
   @override
   Widget build(BuildContext context) {
-    File file = File(
-        '/storage/emulated/0/Android/data/demo.flutter.flutter_camera_plugin_example/files/demo.flutter.flutter_camera_plugin_example/1652327416575.jpg');
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -70,6 +69,9 @@ class _MyAppState extends State<MyApp> {
                             value.length.toString() +
                             "" +
                             value[0]);
+                        setState(() {
+                          file = File(value[0]);
+                        });
                       }
                     });
                   },
@@ -78,14 +80,19 @@ class _MyAppState extends State<MyApp> {
                   onPressed: () {
                     takeCamera().then((value) {
                       debugPrint("拍照结果=" + value);
+                      setState(() {
+                        file = File(value);
+                      });
                     });
                   },
                   child: Text("拍照")),
-              Image.file(
-                file,
-                width: 100,
-                height: 100,
-              )
+              file == null
+                  ? Container()
+                  : Image.file(
+                      file!,
+                      width: double.infinity,
+                      height: 200,
+                    )
             ],
           ),
         ),
@@ -93,8 +100,8 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  Future<dynamic> takePhoto(int maxSelectedNum) async {
-    dynamic path = await FlutterCameraPlugin.takePhoto();
+  Future<List> takePhoto(int maxSelectedNum) async {
+    dynamic path = await FlutterCameraPlugin.takePhoto(maxSelectedNum);
     return path;
   }
 

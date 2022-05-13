@@ -57,7 +57,7 @@ public class FlutterCameraPlugin implements FlutterPlugin, MethodCallHandler, Ac
             if (requestCode == TAKE_PICTURES) {
                 if (resultCode != RESULT_OK) {
                     checkedItems.clear();
-                    result.success(gson.toJson(checkedItems));
+                    result.success(checkedItems);
                     return false;
                 }
                 if (data != null) {
@@ -68,7 +68,7 @@ public class FlutterCameraPlugin implements FlutterPlugin, MethodCallHandler, Ac
                         String path = Pic.getPicAddress(selectedImage, activityPluginBinding.getActivity());
                         checkedItems.add(path);
                     }
-                    result.success(gson.toJson(checkedItems));
+                    result.success(checkedItems);
                    // channel.invokeMethod("takePhotoResult", gson.toJson(checkedItems));
                 }
             } else if (requestCode == TAKE_CAMERA) {
