@@ -23,7 +23,8 @@
   if ([@"getPlatformVersion" isEqualToString:call.method]) {
     result([@"iOS " stringByAppendingString:[[UIDevice currentDevice] systemVersion]]);
   }else if ([@"takePhoto" isEqualToString:call.method]){
-      NSInteger count = (NSInteger)call.arguments;
+      NSNumber *countNum = (NSNumber *)call.arguments;
+      NSInteger count = countNum.integerValue;
       if (count == 0) {
           count = 1;
       }

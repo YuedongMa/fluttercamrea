@@ -1,7 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 class FlutterCameraPlugin {
@@ -12,7 +9,7 @@ class FlutterCameraPlugin {
     return version;
   }
 
-  static Future<List> takePhoto([int? maxSelectNum]) async {
+  static Future<List> takePhoto([int? maxSelectNum = 1]) async {
     List path = await _channel.invokeMethod('takePhoto', maxSelectNum);
     return path;
   }
