@@ -2,7 +2,6 @@
 #import "TZImagePickerController.h"
 
 @interface FlutterCameraPlugin ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,TZImagePickerControllerDelegate>
-//@property (nonatomic, strong) UIImagePickerController *imagePickerVc;
 @property (nonatomic, strong) FlutterResult resultBlock;
 @property (nonatomic ,copy) NSString *imageCachPath;
 @end
@@ -43,13 +42,11 @@
               }
               result(imageList);
           }else{
-//              FlutterError *error = [FlutterError errorWithCode:@"402" message:@"未选择图片" details:@"未选择图片"];
               result(@[]);
           }
       }];
       //用户取消了照片选择
       [imagePickerVc setImagePickerControllerDidCancelHandle:^{
-//                FlutterError *error = [FlutterError errorWithCode:@"401" message:@"获取失败" details:@"取消照片选择"];
           result(@[]);
       }];
       
@@ -62,7 +59,6 @@
           picker.delegate = self;
           [[self viewControllerWithWindow:nil] presentViewController:picker animated:YES completion:nil];
       }else{
-//          FlutterError *error = [FlutterError errorWithCode:@"403" message:@"不允许使用相机" details:@"不允许使用相机"];
           result(@"");
       }
   } else {
@@ -73,13 +69,11 @@
 #pragma mark - UIImagePickerController delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     UIImage *selectedImage = info[UIImagePickerControllerEditedImage]?:info[UIImagePickerControllerOriginalImage];
-    
+    //用日期命名照片名字
      NSDate * date=[NSDate date];
      NSDateFormatter *dateformatter=[[NSDateFormatter alloc] init];
     [dateformatter setDateFormat:@"YYYYMMddHHmmss"];
     NSString * imageName=[dateformatter stringFromDate:date];
-
-//    NSString *imageName = [NSString stringWithFormat:@"%@",[NSDate timeIntervalSinceReferenceDate]];
     imageName = [imageName stringByReplacingOccurrencesOfString:@" " withString:@""];
     imageName = [imageName stringByAppendingString:@".png"];
     [self saveImage:selectedImage withName:imageName];
@@ -88,10 +82,7 @@
 
 //取消拍照
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
-//    FlutterError *error = [FlutterError errorWithCode:@"401" message:@"获取失败" details:@"取消拍照"];
-//    if (self.resultBlock) {
-//        self.resultBlock(error);
-//    }
+    [picker dismissViewControllerAnimated:YES completion:nil];
     if (self.resultBlock) {
         self.resultBlock(@"");
     }
@@ -119,16 +110,10 @@
 
     NSString *finalPath = [docPath stringByAppendingPathComponent:name];
 
-    
-
     // Remove the filename and create the remaining path
-
     [fileManager createDirectoryAtPath:[finalPath stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:nil];//stringByDeletingLastPathComponent是关键
 
-    
-
     return finalPath;
-
 }
 
 - (NSString *)applicationStorageDirectory {
@@ -158,7 +143,6 @@
         NSLog(@"+++++++++++++++++++%@",_imageCachPath);
         [fileManager createDirectoryAtPath:_imageCachPath withIntermediateDirectories:YES attributes:nil error:nil];
     }
-//    [self fielName];
 }
 
 
